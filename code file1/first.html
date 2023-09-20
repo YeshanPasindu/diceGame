@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DICE GAME</title>
+</head>
+<style>
+
+body {
+    background-image: url('back2.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+.button {
+    border: black solid;
+    border-radius: 10px;
+    color: rgb(2, 0, 0);
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: rgb(24, 46, 156);
+    display: rgb(53, 123, 85);
+    font-size: 16px;
+    margin: 50px 650px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.buttona {
+    background-color: #126327; 
+    color: rgb(6, 39, 4);
+}
+
+.buttona:hover {
+    background-color: #15521f;
+    color: white;
+}
+
+.buttonb {
+    background-color: #9f2929; 
+    color: rgb(19, 4, 4); 
+}
+
+.buttonb:hover {
+    background-color: #15521f;
+    color: white;
+}
+
+body {
+    height: 600px;
+    place-items: center;
+    display: grid;
+}
+
+.dice_box {
+    width: 350px;
+    height: 100px;
+    border: 3px solid rgb(39, 35, 35);
+    margin-top:80px;  
+    padding: 20px;
+    background-color:antiquewhite;   
+}  
+
+.ph1 {
+    width:15%;    
+    margin-top: 5px;
+    margin-left: 30px;
+    position:absolute;
+}
+
+.ph2 {
+    width:15%;
+    margin-top: 5px;
+    margin-left: 220px;   
+}
+
+.player_box {
+    width: 850px;
+    height: 200px;
+    border: 3px solid rgb(134, 158, 29);
+    margin-top:10px;  
+    padding: 50px;
+    position:absolute;   
+}  
+
+.ply1_box {
+    height: 100px;
+    width:100px;    
+    margin-top: 20px;
+    margin-left: 40px;
+    margin-right: 550px;
+    position: absolute;
+}
+
+.ply2_box {
+    height: 100px;
+    width:100px;   
+    margin-top: 15px;
+    margin-left: 515px; 
+    position:absolute;  
+}
+
+.ply1t {
+    background-color:rgb(203, 122, 164);
+    font-size:50px;
+    font-weight:bold;
+    font-family: 'Courier New';
+    height: 70px;
+    width:80px;    
+    margin-top: 85px;
+    margin-right: 305px;
+    text-align: center;
+    position:absolute; 
+}
+
+.ply2t {
+    background-color:rgb(122, 189, 105);
+    font-size:50px;
+    font-weight:bold;
+    font-family: 'Courier New';
+    height: 70px;
+    width:80px;    
+    margin-top: 105px;
+    margin-left: 315px;
+    margin-bottom: 20px;
+    text-align: center;
+    position:absolute;
+}
+
+.winp1 {
+    margin-bottom: 50px;
+    margin-left: 10px;
+    margin-right: 300px;
+    position:absolute;
+}
+
+.winp2 {
+    margin-bottom: 50px;
+    margin-left: 600px;
+    margin-right: 300px;
+    position:absolute;
+}
+
+</style>  
+
+<body>
+
+
+<div class="dice_box">
+    <div class="ph1">
+        <img id="ima1" src="dice_1.png" width="100" height="100"  />
+    </div>
+    <div class="ph2">
+        <img id="ima2" src="dice_3.png" width="100" height="100"  /></div>
+    </div>
+</div>
+    
+
+<div class="ply1_box">
+    <label style="font-size:20px"><b><span id="win1" style="color:rgb(127, 219, 104)" ></span></b></label>
+    <br>
+    <img id="ply1" src="player1.jpeg" width="100" height="100"  />
+    <br><br>
+    <label style="font-size:30px" >Player 1</label>   
+</div>
+    
+<div class="winp1">
+    <img id="winn1" src="win.jpg" width="60" height="60" />
+</div>
+
+<div class="ply1t">
+    <label><span id="totalof1"></span></label>
+</div>
+
+<div class="ply2_box">
+    <label style="font-size:20px"><b><span id="win2" style="color:rgb(127, 219, 104)" ></span></b></label>
+    <br>
+    <img id="ply2" src="player2.jpeg" width="100" height="100" />  
+    <br><br>
+    <label style="font-size:30px">Player 2</label>  
+</div>
+
+<div class="winp2">
+    <img id="winn2" display=" " src="win.jpg" width="60" height="60" />
+</div>
+
+<div class="ply2t">        
+    <label><span id="totalof2"></span></label>
+</div>
+   
+<button  id="btnID1" class="button buttona" onclick=" return rol()"><b>ROLL</b></button>
+<button  id="btnID2" class="button buttonb" onclick=" return newGame()"><b>NEW GAME🔁 </b></button>
+
+<br><br>
+
+<script>
+
+let x=1;
+let total1=0;
+let total2=0;
+
+document.getElementById("winn1").hidden= true;
+document.getElementById("winn2").hidden= true;
+
+function rol(){
+    
+let num1 = 1+Math.floor(Math.random() * 6);
+let num2 = 1+Math.floor(Math.random() * 6);
+    
+    
+// -----------------CHANGE PHOTOS------------------
+
+if(num1 == 1)
+    {document.getElementById("ima1")
+    ima1.src="dice_1.png";} 
+else if(num1 == 2){document.getElementById("ima1")
+    ima1.src="dice_2.png";}       
+else if(num1 == 3) {document.getElementById("ima1")
+    ima1.src="dice_3.png";}              
+else if(num1 == 4) {document.getElementById("ima1")
+    ima1.src="dice_4.png";}       
+else if(num1 == 5) {document.getElementById("ima1")
+    ima1.src="dice_5.png";}       
+else {document.getElementById("ima1")
+    ima1.src="dice_6.png";}       
+
+
+if(num2 == 1) 
+    {document.getElementById("ima2")
+    ima2.src="dice_1.png";}
+else if(num2 == 2){document.getElementById("ima2")
+    ima2.src="dice_2.png";}       
+else if(num2 == 3) {document.getElementById("ima2")
+    ima2.src="dice_3.png";}              
+else if(num2 == 4) {document.getElementById("ima2")
+    ima2.src="dice_4.png";}       
+else if(num2 == 5) {document.getElementById("ima2")
+    ima2.src="dice_5.png";}       
+else {document.getElementById("ima2")
+    ima2.src="dice_6.png";}       
+   
+//    -------------------CHANGE PHOTOS------------------
+
+
+if(x==1)   
+{
+    if(num1==1 && num2==1)
+    {
+        total1=0;
+        document.getElementById("totalof1").innerHTML= total1
+        document.getElementById("totalof2").innerHTML= total2
+        x=2;
+    }
+    else if(num1==num2)
+    {
+        if((total1+num1+num2)<=100)
+        {
+            total1=total1+num1+num2;
+            document.getElementById("totalof1").innerHTML= total1
+            document.getElementById("totalof2").innerHTML= total2
+        }
+        else
+        {
+            x=2;
+        }
+    }
+    else
+    {
+        if((total1+num1+num2)<=100)
+        {
+            x=2;
+            total1=total1+num1+num2;
+            document.getElementById("totalof1").innerHTML= total1
+            document.getElementById("totalof2").innerHTML= total2
+        }
+        else
+        {
+            x=2;
+        }
+    }
+} 
+else
+{
+    if(num1==1 && num2==1)
+    {
+        total2=0;
+        x=1;
+
+        document.getElementById("totalof1").innerHTML= total1
+        document.getElementById("totalof2").innerHTML= total2
+    }
+    else if(num1==num2)
+    {
+        if((total2+num1+num2)<=100)
+        {
+            total2=total2+num1+num2;
+
+            document.getElementById("totalof1").innerHTML= total1
+            document.getElementById("totalof2").innerHTML= total2
+        }
+        else
+        {
+            x=1;
+        }
+    }
+    else
+    {
+        if((total2+num1+num2)<=100)
+        {
+            x=1;
+            total2=total2+num1+num2;
+
+            document.getElementById("totalof1").innerHTML= total1
+            document.getElementById("totalof2").innerHTML= total2
+        }
+        else
+        {
+            x=1;
+        }
+    }
+}
+    
+if(total1==100 )
+{
+    document.getElementById("totalof1").innerHTML= total1
+    document.getElementById("totalof2").innerHTML= total2
+    document.getElementById("win1").innerHTML= "WINNER" 
+    document.getElementById("winn1").hidden= false;
+    document.getElementById("btnID1").disabled = true; 
+}
+else if(total2==100 )
+{
+    document.getElementById("totalof1").innerHTML= total1
+    document.getElementById("totalof2").innerHTML= total2
+    document.getElementById("win2").innerHTML= "WINNER"
+    document.getElementById("winn2").hidden= false;
+    document.getElementById("btnID1").disabled = true; 
+}
+
+}
+
+function newGame() 
+{
+    x=1;
+    total1=0;
+    total2=0;
+    document.getElementById("btnID1").disabled = false;
+    document.getElementById("totalof1").innerHTML= total1
+    document.getElementById("totalof2").innerHTML= total2
+    
+    document.getElementById("win1").innerHTML= " "; 
+    document.getElementById("win2").innerHTML= " "; 
+
+    document.getElementById("winn1").hidden= true;
+    document.getElementById("winn2").hidden= true; 
+}   
+
+</script>
+</body>
+</html>
